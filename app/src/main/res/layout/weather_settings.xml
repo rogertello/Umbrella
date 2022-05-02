@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.WeatherSettingsActivity"
+    >
+
+    <RadioGroup
+        android:id="@+id/rbg_Scale"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/select_your_scale" />
+
+        <RadioButton
+            android:id="@+id/rb_Kelvin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/kelvin" />
+
+        <RadioButton
+            android:id="@+id/rb_Celcius"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/celcius" />
+
+        <RadioButton
+            android:id="@+id/rb_Farenheith"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/farenheith" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/tb_ZipCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:name="23445"/>
+
+    <Button
+        android:id="@+id/btnSetReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="@string/set_return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rbg_Scale" />
+
+    <EditText
+        android:id="@+id/tb_ZipCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:hint="@string/zip_code"
+        app:layout_constraintBottom_toTopOf="@+id/rbg_Scale"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
