@@ -24,10 +24,10 @@ class WeatherViewModel @Inject constructor(
 
     fun onCreate(){
         Log.d(TAG, "onCreate: Iniciado")
-        viewModelScope.launch{
+        viewModelScope.launch() {
             isLoading.postValue(true)
           //  val result = getWeather("30339",API_VALUE, API_VALUE_TEMP_CELSIUS)
-            val result = getWeather(ThreadObjects.ZipCode,API_VALUE, ThreadObjects.ScaleMesure)
+            val result = getWeather.invoke(ThreadObjects.ZipCode, API_VALUE, ThreadObjects.ScaleMesure)
             val countITems = result?.listItems?.count()
             val scaleMssure=ThreadObjects.ScaleMesure
             val zcode=ThreadObjects.ZipCode

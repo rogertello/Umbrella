@@ -1,5 +1,6 @@
 package com.example.umbrella.model
 
+import com.example.umbrella.model.domain.GetWeatherUseCase
 import com.example.umbrella.model.network.*
 import dagger.Module
 import dagger.Provides
@@ -28,7 +29,14 @@ object NetworkModule
 
     @Provides
     @Singleton
-    @GET(END_POINT_WEATHER)
+    fun provideuseczse(repo:WeatherRepository):GetWeatherUseCase
+    {
+        return GetWeatherUseCase(repo)
+    }
+
+    @Provides
+    @Singleton
+  //  @GET(END_POINT_WEATHER)
     fun provideRetrofit(
        //@Query(PARAM_WEATHER_ZIP)  Zip:String,
        //@Query(PARAM_WEATHER_APPID) appid:String,
