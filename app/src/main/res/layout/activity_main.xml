@@ -29,7 +29,7 @@
                 app:cardElevation="14dp"
                 app:cardMaxElevation="12dp">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/header_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                         app:layout_constraintStart_toEndOf="@id/tv_sky"
 
                         app:layout_constraintTop_toBottomOf="@id/tv_temperature" />
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.cardview.widget.CardView>

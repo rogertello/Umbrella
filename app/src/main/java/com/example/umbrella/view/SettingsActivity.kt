@@ -6,9 +6,8 @@ import android.view.View.inflate
 import androidx.appcompat.app.AppCompatActivity
 import com.example.umbrella.R
 import android.content.Intent
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.TextView
+import android.view.View
+import android.widget.*
 import com.example.umbrella.model.MainObjectList
 import com.example.umbrella.model.ThreadObjects
 import com.example.umbrella.model.network.API_VALUE_TEMP_CELSIUS
@@ -16,64 +15,73 @@ import com.example.umbrella.model.network.API_VALUE_TEMP_FAHRENHEIT
 import com.example.umbrella.model.network.API_VALUE_TEMP_Kelvin
 
 
-class WeatherSettingsActivity : AppCompatActivity() {
+class WeatherSettingsActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     private lateinit var binding : WeatherSettingsActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.weather_settings)
 
+        var listScales = listOf<String>("Celsius", "Farenheith", "Kelvin")
         val cZip = findViewById<TextView>(R.id.tb_ZipCode)
-        val cCelcius = findViewById<RadioButton>(R.id.rb_Celcius)
-        val cFarenheit = findViewById<RadioButton>(R.id.rb_Farenheith)
-        val cKelvin = findViewById<RadioButton>(R.id.rb_Kelvin)
+        val spinnerScale = findViewById<Spinner>(R.id.spinner_scale)
+
+        val adap: ArrayAdapter<*> = ArrayAdapter(this, android.R.layout.simple_spinner_item,  listScales )
+
+        spinnerScale.adapter=adap
+        spinnerScale .onItemSelectedListener = this
 
         val btn =findViewById<Button>(R.id.btnSetReturn)
         cZip.text = ThreadObjects.ZipCode
 
         when (ThreadObjects.ScaleMesure){
             API_VALUE_TEMP_CELSIUS ->{
-                                        cCelcius.isSelected=true
-                                        cFarenheit.isSelected=false
-                                        cKelvin.isSelected=false
-                                    }
+                spinnerScale.setSelection(0)
+            }
             API_VALUE_TEMP_FAHRENHEIT ->{
-                                        cCelcius.isSelected=false
-                                        cFarenheit.isSelected=true
-                                        cKelvin.isSelected=false
-                                    }
+                spinnerScale.setSelection(1)
+            }
             API_VALUE_TEMP_Kelvin ->{
-                                    cCelcius.isSelected=false
-                                    cFarenheit.isSelected=false
-                                    cKelvin.isSelected=true
-                                }
+                spinnerScale.setSelection(2)
+            }
             else->{
-                    cCelcius.isSelected=false
-                    cFarenheit.isSelected=false
-                    cKelvin.isSelected=true
-                    }
+                spinnerScale.setSelection(0)
+                ThreadObjects.ScaleMesure=API_VALUE_TEMP_CELSIUS
+            }
         }
-
 
         btn.setOnClickListener {
 
             ThreadObjects.ZipCode = cZip.text.toString()
+            var posDDL =spinnerScale.selectedItemPosition
 
-            if(cCelcius.isSelected)
+            when(posDDL)
             {
-                ThreadObjects.ScaleMesure=API_VALUE_TEMP_CELSIUS
-            }
-            else if(cFarenheit.isSelected)
-            {
-                ThreadObjects.ScaleMesure= API_VALUE_TEMP_FAHRENHEIT
-            }
-            else{
-                ThreadObjects.ScaleMesure=API_VALUE_TEMP_Kelvin
+                0->{
+                    ThreadObjects.ScaleMesure=API_VALUE_TEMP_CELSIUS
+                }
+                1->{
+                    ThreadObjects.ScaleMesure= API_VALUE_TEMP_FAHRENHEIT
+                }
+                2->{
+                    ThreadObjects.ScaleMesure= API_VALUE_TEMP_Kelvin
+                }
+                else->{
+                    ThreadObjects.ScaleMesure=API_VALUE_TEMP_CELSIUS
+                }
             }
 
             val intent :Intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
+    }
+
+    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        //TODO("Not yet implemented")
+    }
+
+    override fun onNothingSelected(p0: AdapterView<*>?) {
+       // TODO("Not yet implemented")
     }
 }
